@@ -27,7 +27,7 @@
       +
     </button>
     <button @click="append(0)" class="button zero">0</button>
-    <button @click="append('.')" class="button">.</button>
+    <button @click="dot" class="button">.</button>
     <button @click="equal" class="button bg-warning-subtle">=</button>
   </div>
 </template>
@@ -38,6 +38,12 @@ import { ref } from 'vue'
 const expression = ref('')
 const calculation = ref('')
 const percentCalculation = ref(false)
+
+const dot = () => {
+  if (expression.value.indexOf('.') === -1 && expression.value !== '') {
+    append('.')
+  }
+}
 
 const del = () => {
   if (expression.value === 'Error') {
@@ -60,9 +66,10 @@ const sign = () => {
 
 const append = (value) => {
   if (
-    !['+', '-', '×', '÷', '%'].includes(
+    (!['+', '-', '×', '÷', '%'].includes(
       expression.value.trim().charAt(expression.value.length - 1)
-    ) ||
+    ) &&
+      expression.value !== '') ||
     !['+', '-', '×', '÷', '%'].includes(value)
   ) {
     expression.value = `${expression.value}${value}`
