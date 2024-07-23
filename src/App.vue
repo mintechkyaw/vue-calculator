@@ -1,5 +1,5 @@
 <template>
-  <div class="main rounded-circle">
+  <div class="main">
     <button class="button display text-end pe-3">{{ expression || 0 }}</button>
     <button @click="del" class="button bg-warning-subtle">Del</button>
     <button @click="clear" class="button bg-body-tertiary">AC</button>
@@ -38,11 +38,13 @@ import { ref } from 'vue'
 const expression = ref('')
 const calculation = ref('')
 const percentCalculation = ref(false)
+const dotInput = ref(true)
 
 const dot = () => {
-  if (expression.value.indexOf('.') === -1 && expression.value !== '') {
+  if (dotInput.value === true) {
     append('.')
   }
+  dotInput.value = false
 }
 
 const del = () => {
@@ -74,13 +76,22 @@ const append = (value) => {
   ) {
     expression.value = `${expression.value}${value}`
     switch (value) {
+      case '+':
+        dotInput.value = true
+        break
+      case '-':
+        dotInput.value = true
+        break
       case '×':
+        dotInput.value = true
         calculation.value = `${calculation.value}*`
         break
       case '÷':
+        dotInput.value = true
         calculation.value = `${calculation.value}/`
         break
       case '%':
+        dotInput.value = true
         calculation.value = `${calculation.value}/100*`
         percentCalculation.value = true
         break
