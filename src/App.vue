@@ -93,7 +93,6 @@ const append = (value) => {
       case '%':
         dotInput.value = true
         calculation.value = `${calculation.value}/100*`
-        percentCalculation.value = true
         break
       default:
         percentCalculation.value = false
@@ -122,30 +121,3 @@ const equal = () => {
   percentCalculation.value = false
 }
 </script>
-
-<style scoped>
-.main {
-  width: 300px;
-  text-align: center;
-  font-size: 30px;
-  display: grid;
-  margin: 150px auto;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(50px, auto);
-}
-
-.display {
-  grid-column: 1/4;
-  background-color: burlywood;
-  overflow-x: auto;
-}
-
-.zero {
-  grid-column: 1/3;
-}
-
-.button {
-  padding: 4px 0px;
-  border: 1px solid rgb(52, 51, 51);
-}
-</style>
