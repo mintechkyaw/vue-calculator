@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <button class="button display text-end pe-3">{{ expression || 0 }}</button>
+    <button class="button display text-end pe-3" @click="">{{ expression || 0 }}</button>
     <button @click="del" class="button bg-warning-subtle">Del</button>
     <button @click="clear" class="button bg-body-tertiary">AC</button>
     <button @click="sign" class="button">+/-</button>
@@ -28,7 +28,7 @@
     </button>
     <button @click="append(0)" class="button zero">0</button>
     <button @click="dot" class="button">.</button>
-    <button @click="equal" class="button bg-warning-subtle">=</button>
+    <button @click="calculate" class="button bg-warning-subtle">=</button>
   </div>
 </template>
 
@@ -72,7 +72,7 @@ const append = (value) => {
       expression.value.trim().charAt(expression.value.length - 1)
     ) &&
       expression.value !== '') ||
-    !['+', '-', '×', '÷', '%'].includes(value)
+    !['+', '-', '×', '÷', '%',0].includes(value)
   ) {
     expression.value = `${expression.value}${value}`
     switch (value) {
@@ -101,7 +101,7 @@ const append = (value) => {
   }
 }
 
-const equal = () => {
+const calculate = () => {
   try {
     if (calculation.value) {
       let expr = calculation.value.trim()
